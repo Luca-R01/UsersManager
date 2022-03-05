@@ -33,7 +33,6 @@ public class UsersRequestDto {
 	public UsersRequestDto() {}
 
 	public UsersRequestDto(String codiceFiscale, String nome, String cognome, Integer eta, Sesso sesso) {
-		super();
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;

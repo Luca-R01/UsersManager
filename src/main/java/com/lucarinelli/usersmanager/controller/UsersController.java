@@ -34,7 +34,6 @@ public class UsersController {
 	
 	@GetMapping("/users/codicefiscale/{codiceFiscale}")
 	public UsersResponseDto getUserByCodiceFiscale(@PathVariable String codiceFiscale) {
-		System.out.println(service.getByCodiceFiscale(codiceFiscale).getCodiceFiscale());
 		return service.getByCodiceFiscale(codiceFiscale);
 	}
 	
