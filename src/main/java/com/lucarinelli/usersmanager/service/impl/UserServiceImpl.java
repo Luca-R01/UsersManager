@@ -42,7 +42,7 @@ public class UserServiceImpl implements UsersService {
 	@Override
 	public UsersResponseDto creaUser(UsersRequestDto dto) {
 		Users user = UsersMapper.ToUser(dto);
-		List <UsersResponseDto> usersList = getAll();
+		List <Users> usersList = repository.findAll();
 		for (Integer i=0; i<usersList.size(); i++) {
 			if (dto.getCodiceFiscale().equals(usersList.get(i).getCodiceFiscale())) {
 				user = null;
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UsersService {
 		user.setEta(dto.getEta());
 		user.setSesso(dto.getSesso());
 		
-		List <UsersResponseDto> usersList = getAll();
+		List <Users> usersList = repository.findAll();
 		for (Integer i=0; i<usersList.size(); i++) {
 			if (dto.getCodiceFiscale().equals(usersList.get(i).getCodiceFiscale())) {
 				user = null;
