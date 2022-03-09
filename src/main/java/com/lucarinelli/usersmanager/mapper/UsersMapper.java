@@ -12,7 +12,6 @@ public class UsersMapper {
 	
 	public static Users ToUser(UsersRequestDto dto) {
 		Users user = new Users();
-		user.setId(dto.getId());
 		user.setCodiceFiscale(dto.getCodiceFiscale());
 		user.setNome(dto.getNome());
 		user.setCognome(dto.getCognome());

@@ -1,8 +1,8 @@
 package com.lucarinelli.usersmanager.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,33 +23,38 @@ public class UsersController {
 	private UsersService service;
 	
 	@GetMapping("/users")
-	public List<UsersResponseDto> getAll(){
-		return service.getAll();
+	public ResponseEntity<?> getAll(){
+		return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/users/{id}")
-	public UsersResponseDto getUserById(@PathVariable String id){
-		return service.getById(id);
+	public ResponseEntity<?> getUserById(@PathVariable String id){
+		UsersResponseDto response = service.getById(id);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+		
 	}
 	
 	@GetMapping("/users/codicefiscale/{codiceFiscale}")
-	public UsersResponseDto getUserByCodiceFiscale(@PathVariable String codiceFiscale) {
-		return service.getByCodiceFiscale(codiceFiscale);
+	public ResponseEntity<?> getUserByCodiceFiscale(@PathVariable String codiceFiscale) {
+		UsersResponseDto response = service.getByCodiceFiscale(codiceFiscale);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@PostMapping("/users")
-	public UsersResponseDto creaUser(@RequestBody @Validated UsersRequestDto request){
-		return service.creaUser(request);
+	public ResponseEntity<?> creaUser(@RequestBody @Validated UsersRequestDto request){
+		return new ResponseEntity<>(service.creaUser(request), HttpStatus.OK);
 	}
 	
 	@PutMapping("/users/codicefiscale/{codiceFiscale}")
-	public UsersResponseDto modificaUser(@PathVariable String codiceFiscale, @RequestBody @Validated UsersRequestDto request) {
-		return service.modificaUser(codiceFiscale, request);
+	public ResponseEntity<?> modificaUser(@PathVariable String codiceFiscale, @RequestBody @Validated UsersRequestDto request) {
+		return new ResponseEntity<>(service.modificaUser(codiceFiscale, request), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/users/codicefiscale/{codiceFiscale}")
-	public void eliminaUser(String codiceFiscale) {
+	public ResponseEntity<?> eliminaUser(String codiceFiscale) {
 		service.eliminaUser(codiceFiscale);
+		return new ResponseEntity<>(HttpStatus.OK);
+		
 	}
 
 }

@@ -4,8 +4,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.annotation.Id;
-
 public class UsersRequestDto {
 	
 	private enum Sesso {
@@ -15,8 +13,6 @@ public class UsersRequestDto {
 		f
 	}
 	
-	@Id
-	private String id;
 	@NotNull
 	@Size(min=16, max=16)
 	private String codiceFiscale;
@@ -38,16 +34,6 @@ public class UsersRequestDto {
 		this.cognome = cognome;
 		this.eta = eta;
 		this.sesso = sesso.toString();
-	}
-	
-	
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getCodiceFiscale() {
