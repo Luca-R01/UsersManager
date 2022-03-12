@@ -13,6 +13,8 @@ public class UsersRequestDto {
 		f
 	}
 	
+	private String id; 
+
 	@NotNull
 	@Size(min=16, max=16)
 	private String codiceFiscale;
@@ -34,6 +36,14 @@ public class UsersRequestDto {
 		this.cognome = cognome;
 		this.eta = eta;
 		this.sesso = sesso.toString();
+	}
+
+	public String getId(){
+		return id;
+	}
+
+	public void setId(String id){
+		this.id = id;
 	}
 
 	public String getCodiceFiscale() {
@@ -74,6 +84,10 @@ public class UsersRequestDto {
 
 	public void setSesso(Sesso sesso) {
 		this.sesso = sesso.toString();
+	}
+
+	public void setSessoString(String sesso) {
+		this.sesso = sesso;
 	}
 	
 	

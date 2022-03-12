@@ -1,10 +1,7 @@
 package com.lucarinelli.usersmanager.dto;
 
-import org.springframework.data.annotation.Id;
-
 public class UsersResponseDto {
 	
-	@Id
 	private String id;
 	private String codiceFiscale;
 	private String nome;
