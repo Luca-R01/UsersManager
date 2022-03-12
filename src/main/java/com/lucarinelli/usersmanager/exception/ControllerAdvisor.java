@@ -17,7 +17,6 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UsersExistException.class)
     public ResponseEntity<Object> handleUsersExistsException(UsersExistException exception, WebRequest request){
-    	System.out.println("Si è verificato un errore: " + exception.getMessage());
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
