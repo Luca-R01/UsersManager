@@ -10,50 +10,43 @@ import com.lucarinelli.usersmanager.dto.UsersRequestDto;
 import com.lucarinelli.usersmanager.dto.UsersResponseDto;
 import com.lucarinelli.usersmanager.mapper.UsersMapper;
 import com.lucarinelli.usersmanager.model.Users;
-import com.lucarinelli.usersmanager.repository.UsersRepository;
 import com.lucarinelli.usersmanager.service.impl.UserServiceImpl;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class UsersTests {
+public class UsersTestsService {
 	
 	@Mock
 	private UserServiceImpl service;
-
-    @Mock
-    private UsersRepository repository;
-
-    UsersRequestDto userCreator(){
-        UsersRequestDto requestDto;
+    
+    private static UsersRequestDto requestDto;
+    private static UsersRequestDto requestDto2;
+    
+    @BeforeAll
+    static void setup() {
         requestDto = new UsersRequestDto();
-        requestDto.setId("id");
         requestDto.setCodiceFiscale("0123456789ABCDEF");
         requestDto.setNome("N");
         requestDto.setCognome("C");
         requestDto.setEta(20);
         requestDto.setSessoString("M");
-        return requestDto;
-    }
-
-    UsersRequestDto userCreator2(){
-        UsersRequestDto requestDto;
-        requestDto = new UsersRequestDto();
-        requestDto.setId("id");
-        requestDto.setCodiceFiscale("FEDCBA9876543210");
-        requestDto.setNome("N2");
-        requestDto.setCognome("C2");
-        requestDto.setEta(19);
-        requestDto.setSessoString("F");
-        return requestDto;
+        
+        requestDto2 = new UsersRequestDto();
+        requestDto2.setCodiceFiscale("FEDCBA9876543210");
+        requestDto2.setNome("N2");
+        requestDto2.setCognome("C2");
+        requestDto2.setEta(19);
+        requestDto2.setSessoString("F");
     }
 
 
     @Test
-    void TestGetAll(){
+    void testGetAll(){
         List<UsersResponseDto> dtoList = new ArrayList<UsersResponseDto>();
         dtoList.add(new UsersResponseDto());
 
@@ -64,8 +57,7 @@ public class UsersTests {
     }
 
     @Test
-    void TestGetById(){
-        UsersRequestDto requestDto = userCreator();
+    void testGetById(){
         Users user = UsersMapper.ToUser(requestDto);
         UsersResponseDto responseDto = UsersMapper.toDto(user);
 
@@ -75,8 +67,7 @@ public class UsersTests {
     }
 
     @Test
-    void TestGetByCodiceFiscale(){
-        UsersRequestDto requestDto = userCreator();
+    void testGetByCodiceFiscale(){
         Users user = UsersMapper.ToUser(requestDto);
         UsersResponseDto responseDto = UsersMapper.toDto(user);
 
@@ -86,8 +77,7 @@ public class UsersTests {
     }
 
     @Test
-    void TestCreaUser(){
-        UsersRequestDto requestDto = userCreator();
+    void testCreaUser(){
         Users user = UsersMapper.ToUser(requestDto);
         UsersResponseDto responseDto = UsersMapper.toDto(user);
         
@@ -97,8 +87,7 @@ public class UsersTests {
     }
 
     @Test
-    void TestModificaUser(){
-        UsersRequestDto requestDto2 = userCreator2();
+    void testModificaUser(){
         Users user2 = UsersMapper.ToUser(requestDto2);
         UsersResponseDto responseDto2 = UsersMapper.toDto(user2);
 
@@ -108,7 +97,7 @@ public class UsersTests {
     }
 
     @Test
-    void TestEliminaUser(){
+    void testEliminaUser(){
         service.eliminaUser("0123456789ABCDEF");
     }
 
