@@ -79,7 +79,4 @@ public class UsersRequestDto {
 	public void setSessoString(String sesso) {
 		this.sesso = sesso;
 	}
-	
-	
-
 }

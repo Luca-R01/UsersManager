@@ -26,15 +26,20 @@ public class UsersTestsApiRestTemplate {
     @InjectMocks
 	private UsersController controller;
 
+    private enum Sesso {
+		M,
+		m,
+		F,
+		f
+	}
+
     private static UsersRequestDto user1RequestDto = new UsersRequestDto();
     private static Users user1 = new Users();
-    private static UsersResponseDto user1ResposeDto = new UsersResponseDto();
 
-	private static UsersRequestDto user2RequestDto = new UsersRequestDto();
+    private static UsersRequestDto user2RequestDto = new UsersRequestDto();
     private static Users user2 = new Users();
-    private static UsersResponseDto user2ResposeDto = new UsersResponseDto();
 
-	@BeforeAll
+    @BeforeAll
 	static void setup(){
 		user1RequestDto.setCodiceFiscale("1234567890123456");
 		user1RequestDto.setNome("Nome");
@@ -43,7 +48,7 @@ public class UsersTestsApiRestTemplate {
 		user1RequestDto.setSessoString("M");
 
         user1 = UsersMapper.ToUser(user1RequestDto);
-        user1ResposeDto = UsersMapper.toDto(user1);
+        UsersMapper.toDto(user1);
 
 		user2RequestDto.setCodiceFiscale("6543210987654321");
 		user2RequestDto.setNome("Nome2");
@@ -52,7 +57,7 @@ public class UsersTestsApiRestTemplate {
 		user2RequestDto.setSessoString("F");
 
         user2 = UsersMapper.ToUser(user2RequestDto);
-        user2ResposeDto = UsersMapper.toDto(user2);
+        UsersMapper.toDto(user2);
 	}
 
     @Test
@@ -63,6 +68,21 @@ public class UsersTestsApiRestTemplate {
     @Test
     void testGetByCodiceFiscale(){
         Mockito.when(restTemplate.getForEntity("http://localhost:8080/users/" + user1.getId(), UsersResponseDto.class));
+    }
+
+    @Test
+    void testCreaUser(){
+        Mockito.when(restTemplate.postForEntity("http://localhost:8080/users/", user1RequestDto, UsersResponseDto.class));
+    }
+
+    @Test
+    void testModificaUser(){
+        restTemplate.put("http://localhost:8080/users/codiceFiscale/" + user1.getCodiceFiscale(), user2RequestDto, UsersResponseDto.class);
+    }
+
+    @Test
+    void testEliminaUser(){
+        restTemplate.delete("http://localhost:8080/users/codiceFiscale/" + user2.getId());
     }
     
 }

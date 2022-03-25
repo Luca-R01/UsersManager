@@ -40,9 +40,8 @@ public class UsersMapper {
 	public static List<UsersResponseDto> toDtoList(List<Users> usersList){
 		logger.info("Richiamato 'UserMapper toDtoList' ");
 		List<UsersResponseDto> dtoList = new ArrayList<UsersResponseDto>();
-		for (Integer i=0; i<usersList.size(); i++) {
-			UsersResponseDto dto = toDto(usersList.get(i));
-			dtoList.add(dto);
+		for (Users user : usersList){
+			dtoList.add(toDto(user));
 		}
 		return dtoList; 
 	}
