@@ -34,14 +34,14 @@ public class UsersTestsService {
         requestDto.setNome("N");
         requestDto.setCognome("C");
         requestDto.setEta(20);
-        requestDto.setSessoString("M");
+        requestDto.setSesso("M");
         
         requestDto2 = new UsersRequestDto();
         requestDto2.setCodiceFiscale("FEDCBA9876543210");
         requestDto2.setNome("N2");
         requestDto2.setCognome("C2");
         requestDto2.setEta(19);
-        requestDto2.setSessoString("F");
+        requestDto2.setSesso("F");
     }
 
 

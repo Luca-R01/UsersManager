@@ -26,13 +26,6 @@ public class UsersTestsApiRestTemplate {
     @InjectMocks
 	private UsersController controller;
 
-    private enum Sesso {
-		M,
-		m,
-		F,
-		f
-	}
-
     private static UsersRequestDto user1RequestDto = new UsersRequestDto();
     private static Users user1 = new Users();
 
@@ -45,7 +38,7 @@ public class UsersTestsApiRestTemplate {
 		user1RequestDto.setNome("Nome");
 		user1RequestDto.setCognome("Cognome");
 		user1RequestDto.setEta(20);
-		user1RequestDto.setSessoString("M");
+		user1RequestDto.setSesso("M");
 
         user1 = UsersMapper.ToUser(user1RequestDto);
         UsersMapper.toDto(user1);
@@ -54,7 +47,7 @@ public class UsersTestsApiRestTemplate {
 		user2RequestDto.setNome("Nome2");
 		user2RequestDto.setCognome("Cognome2");
 		user2RequestDto.setEta(18);
-		user2RequestDto.setSessoString("F");
+		user2RequestDto.setSesso("F");
 
         user2 = UsersMapper.ToUser(user2RequestDto);
         UsersMapper.toDto(user2);

@@ -42,13 +42,13 @@ public class UsersTestsApiMockMvc {
 		user1.setNome("Nome");
 		user1.setCognome("Cognome");
 		user1.setEta(20);
-		user1.setSessoString("M");
+		user1.setSesso("M");
 
 		user2.setCodiceFiscale("6543210987654321");
 		user2.setNome("Nome2");
 		user2.setCognome("Cognome2");
 		user2.setEta(18);
-		user2.setSessoString("F");
+		user2.setSesso("F");
 	}
 
 	@Test
