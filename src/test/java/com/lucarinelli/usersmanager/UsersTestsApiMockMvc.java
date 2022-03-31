@@ -1,4 +1,4 @@
-package com.lucarinelli.usersmanager;
+/*package com.lucarinelli.usersmanager;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -93,4 +93,4 @@ public class UsersTestsApiMockMvc {
 	}
 	
 
-}
+} */

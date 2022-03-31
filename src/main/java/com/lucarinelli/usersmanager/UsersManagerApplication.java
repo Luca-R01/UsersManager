@@ -11,6 +11,7 @@ public class UsersManagerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UsersManagerApplication.class, args);
+		
 	}
 
 }

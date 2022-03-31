@@ -41,7 +41,7 @@ public class UsersController {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<?> creaUser(@RequestBody @Validated UsersRequestDto request){
+	public ResponseEntity<?> creaUser(@RequestBody UsersRequestDto request){
 		return new ResponseEntity<>(service.creaUser(request), HttpStatus.OK);
 	}
 	

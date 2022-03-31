@@ -1,5 +1,7 @@
 package com.lucarinelli.usersmanager.model;
 
+import java.time.LocalDate;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,5 +23,11 @@ public class Users {
 	private String nome;
 	private String cognome;
 	private Integer eta;
+	private LocalDate dataDiNascita;
+	private String cittaNatale;
 	private String sesso;
+
+	public void setDataDiNascita(String date){
+		this.dataDiNascita = LocalDate.parse(date);
+	}
 }

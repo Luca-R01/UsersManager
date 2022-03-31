@@ -16,6 +16,7 @@ import com.lucarinelli.usersmanager.mapper.UsersMapper;
 import com.lucarinelli.usersmanager.model.Users;
 import com.lucarinelli.usersmanager.repository.UsersRepository;
 import com.lucarinelli.usersmanager.service.UsersService;
+import com.lucarinelli.usersmanager.utility.CalcoloCodiceFiscale;
 
 @Service
 public class UserServiceImpl implements UsersService {
@@ -28,39 +29,39 @@ public class UserServiceImpl implements UsersService {
 	@Override
 	public List<UsersResponseDto> getAll() {
 		logger.info("Richiamato il metodo 'getAll' ");
-		List<Users> usersList = repository.findAll();
-		List<UsersResponseDto> dtoList = UsersMapper.toDtoList(usersList);
-		return dtoList;
+
+		return UsersMapper.toDtoList(repository.findAll());
 	}
 
 	@Override
 	public UsersResponseDto getById(String id) {
 		logger.info("Richiamato il metodo 'getById' ");
-		Users user = repository.findById(id).orElseThrow( () -> new UsersNotFoundException(id));
-		UsersResponseDto dto = UsersMapper.toDto(user);
-		return dto;
+
+		return UsersMapper.toDto(repository.findById(id).orElseThrow( () -> new UsersNotFoundException(id)));
 	}
 
 	@Override
 	public UsersResponseDto getByCodiceFiscale(String codiceFiscale) {
 		logger.info("Richiamato il metodo 'getByCodiceFiscale' ");
+
 		Users user = repository.findByCodiceFiscale(codiceFiscale).orElseThrow( () -> new UsersNotFoundException(codiceFiscale));
-		UsersResponseDto dto = UsersMapper.toDto(user);
-		return dto;
+		return UsersMapper.toDto(user);
 	}
 
 	@Override
 	public UsersResponseDto creaUser(UsersRequestDto dto) {
 		logger.info("Richiamato il metodo 'creaUser' ");
+
 		Users user = UsersMapper.ToUser(dto);
-		Optional<Users> userOptional = repository.findByCodiceFiscale(dto.getCodiceFiscale());
+		user.setCodiceFiscale(CalcoloCodiceFiscale.get(user.getCognome(), user.getNome(), user.getSesso(), user.getCittaNatale(), user.getDataDiNascita()));
+		
+		Optional<Users> userOptional = repository.findByCodiceFiscale(user.getCodiceFiscale());
 		if(userOptional.isEmpty()){
 			repository.save(user);
-			UsersResponseDto response = UsersMapper.toDto(user);
-			return response;
+			return UsersMapper.toDto(user);
 		}
 		else {
-			throw new UsersExistException(dto.getCodiceFiscale());
+			throw new UsersExistException(user.getCodiceFiscale());
 		} 
 	
 	}
@@ -68,30 +69,34 @@ public class UserServiceImpl implements UsersService {
 	@Override
 	public UsersResponseDto modificaUser(String codiceFiscale, UsersRequestDto dto) {
 		logger.info("Richiamato il metodo 'modificaUser' ");
+
 		Users user = repository.findByCodiceFiscale(codiceFiscale).orElseThrow( () -> new UsersNotFoundException(codiceFiscale));
 		
-		user.setCodiceFiscale(dto.getCodiceFiscale());
 		user.setNome(dto.getNome());
 		user.setCognome(dto.getCognome());
-		user.setEta(dto.getEta());
 		user.setSesso(dto.getSesso());
-
-		Optional<Users> userOptional = repository.findByCodiceFiscale(dto.getCodiceFiscale());
+		user.setCittaNatale(dto.getCittaNatale());
+		user.setDataDiNascita(dto.getDataDiNascita());
+		user.setCodiceFiscale(CalcoloCodiceFiscale.get(user.getCognome(), user.getNome(), user.getSesso(), user.getCittaNatale(), user.getDataDiNascita()));
+		
+		Optional<Users> userOptional = repository.findByCodiceFiscale(user.getCodiceFiscale());
 		if(userOptional.isEmpty()){
 			repository.save(user);
-			UsersResponseDto response = UsersMapper.toDto(user);
-			return response;
+			return UsersMapper.toDto(user);
 		}
 		else {
-			throw new UsersExistException(dto.getCodiceFiscale());
+			throw new UsersExistException(user.getCodiceFiscale());
 		} 
 	}
 
 	@Override
 	public void eliminaUser(String codiceFiscale) {
 		logger.info("Richiamato il metodo 'eliminaUser' ");
+		
 		Users user = repository.findByCodiceFiscale(codiceFiscale).orElseThrow( () -> new UsersNotFoundException(codiceFiscale));
 		repository.delete(user);
 	}
+
+	
 
 }

@@ -1,4 +1,4 @@
-package com.lucarinelli.usersmanager;
+/*package com.lucarinelli.usersmanager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -101,4 +101,4 @@ public class UsersTestsService {
         service.eliminaUser("0123456789ABCDEF");
     }
 
-}
+} */

@@ -17,10 +17,10 @@ public class UsersMapper {
 	public static Users ToUser(UsersRequestDto dto) {
 		logger.info("Richiamato 'UserMapper toUser' ");
 		Users user = new Users();
-		user.setCodiceFiscale(dto.getCodiceFiscale());
 		user.setNome(dto.getNome());
 		user.setCognome(dto.getCognome());
-		user.setEta(dto.getEta());
+		user.setDataDiNascita(dto.getDataDiNascita());
+		user.setCittaNatale(dto.getCittaNatale());
 		user.setSesso(dto.getSesso());
 		return user;
 	}

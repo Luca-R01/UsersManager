@@ -1,4 +1,4 @@
-package com.lucarinelli.usersmanager.mapper;
+package com.lucarinelli.usersmanager.utility;
 
 import java.io.IOException;
 
@@ -11,5 +11,6 @@ public class JsonUtil {
 	public static byte[] toJson(Object object) throws IOException {
 		return mapper.writeValueAsBytes(object);
 	}
+
 
 }

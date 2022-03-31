@@ -1,4 +1,4 @@
-package com.lucarinelli.usersmanager;
+/*package com.lucarinelli.usersmanager;
 
 import com.lucarinelli.usersmanager.controller.UsersController;
 import com.lucarinelli.usersmanager.dto.UsersRequestDto;
@@ -79,3 +79,4 @@ public class UsersTestsApiRestTemplate {
     }
     
 }
+*/
